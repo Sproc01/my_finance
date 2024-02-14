@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myFinance/src/transaction.dart';
-import 'package:myFinance/src/TypeTransaction.dart';
+import 'package:my_finance/src/transaction.dart';
+import 'package:my_finance/src/TypeTransaction.dart';
 
 int dropdownValue = 0;
 const listGlobal = TypeTransaction.values;

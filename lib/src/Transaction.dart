@@ -1,4 +1,4 @@
-import "package:myFinance/src/TypeTransaction.dart";
+import "package:my_finance/src/TypeTransaction.dart";
 
 class Transaction
 {
