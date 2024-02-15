@@ -5,19 +5,19 @@ import 'screens/homePage.dart';
 import 'screens/insertPage.dart';
 import 'color_schemes.g.dart';
 
-void main() {
+void main() async {
     runApp(
       ChangeNotifierProvider(
-      create: (context) => Wallet(),
-      child: MaterialApp(
-        theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
-        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-        title: 'Named Routes',
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const homePage(),
-          '/insertOut/': (context) => insertOutPage(),
-        },
+        create: (context) => Wallet(),
+        child: MaterialApp(
+          theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+          darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+          title: 'Named Routes',
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const homePage(),
+            '/insertOut/': (context) => insertOutPage(),
+          },
       )   
     )
   );

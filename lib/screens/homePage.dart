@@ -90,7 +90,7 @@ class homePage extends StatelessWidget {
         onPressed: () async {
           final result = await Navigator.pushNamed(context, '/insertOut/');
           if (result != null) {
-            wallet.addTransaction(Transaction.fromString(result as String));
+            wallet.addTransaction(Transaction.fromJson(result as Map<String, dynamic>));
           }
           else {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Operation canceled')));

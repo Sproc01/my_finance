@@ -73,7 +73,7 @@ class insertOutPage extends StatelessWidget {
                 {
                   t = Transaction(-double.parse(myController.text), DateTime.now(), listGlobal[dropdownValue]);
                 }
-                Navigator.pop(context, t.toString());
+                Navigator.pop(context, Transaction.toMap(t));
               },
               child: const Text('Insert Transaction'),
             ),

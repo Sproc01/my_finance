@@ -15,16 +15,15 @@ class Wallet extends ChangeNotifier
 
   Wallet();
 
-  Wallet.fromString(String s){
-    if (s=="") return;
-    List<String> lines = s.split("\n");
-    for (var line in lines) {
-      if(line.isNotEmpty)
-      {
-        transactions.add(Transaction.fromString(line));
-      }
-    }
+  factory Wallet.fromJson(Map<String, dynamic> jsonData) {
+    Wallet w=Wallet();
+    w.transactions = Transaction.decode(jsonData['transactions']);
+    return w;
   }
+
+  static Map<String, dynamic> toMap(Wallet t) => {
+    'transactions': Transaction.encode(t.transactions),
+  };
 
   void addTransaction(Transaction transaction){
     transactions.add(transaction);
@@ -34,15 +33,6 @@ class Wallet extends ChangeNotifier
   void removeTransaction(Transaction transaction){
     transactions.remove(transaction);
     notifyListeners();
-  }
-
-  @override
-  String toString() {
-    String s="";
-    for (var transaction in transactions) {
-      s+="$transaction\n";
-    }
-    return s;
   }
 
   double percentageOut(TypeTransaction type){
