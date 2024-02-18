@@ -92,7 +92,7 @@ class homePage extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   const Text('Amount available: ', style: TextStyle(fontSize: 20)),
-                  SizedBox(width: MediaQuery.of(context).size.width/2),
+                  const SizedBox(width: 20),
                   Consumer<Wallet>(
                     builder: (context, wallet, child)
                     {

@@ -31,7 +31,6 @@ class insertOutPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const Text('Insert Amount: '),
-            const SizedBox(height: 20),
             TextField(
                 controller: myController,
                 decoration: const InputDecoration(
@@ -74,7 +73,7 @@ class insertOutPage extends StatelessWidget {
             const Row(
               children: <Widget>[
                 Text('Type of Transaction: ', style: TextStyle(fontSize: 20)),
-                SizedBox(width: 20),
+                SizedBox(width: 30),
                 DropdownButtonTransaction(),
               ],
             ),
@@ -123,7 +122,7 @@ class _DropdownButtonTransactionState extends State<DropdownButtonTransaction> {
       value: list[dropdownValue],
       icon: const Icon(Icons.arrow_drop_down),
       elevation: 16,
-      style: const TextStyle(textBaseline: TextBaseline.alphabetic, fontSize: 20),
+      style: const TextStyle(fontSize: 15, color: Colors.black),
       underline: Container(
         height: 5,
       ),
