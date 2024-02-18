@@ -22,32 +22,33 @@ class homePage extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 20.0, top: 20.0, left: 20.0, right: 20.0),
         child: Column(
           children: [
-            Row(
-              children: <Widget>[
                 Flexible(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height/3,
-                    width: MediaQuery.of(context).size.width/2,
+                    height: MediaQuery.of(context).size.height/2,
+                    width: MediaQuery.of(context).size.width,
                     child: Card(
                       child: Consumer<Wallet>(
                         builder: (context, wallet, child){
                           List<DataChart> data = [
-                              DataChart('Food', wallet.percentageOut(TypeTransaction.Food)),
-                              DataChart('Transport', wallet.percentageOut(TypeTransaction.Transport)),
-                              DataChart('Shopping', wallet.percentageOut(TypeTransaction.Shopping)),
-                              DataChart('Health', wallet.percentageOut(TypeTransaction.Health)),
-                              DataChart('Leisure', wallet.percentageOut(TypeTransaction.Leisure)),
-                              DataChart('Other', wallet.percentageOut(TypeTransaction.Other)),
+                              DataChart('Food', wallet.percentage(TypeTransaction.Food)),
+                              DataChart('Transport', wallet.percentage(TypeTransaction.Transport)),
+                              DataChart('Shopping', wallet.percentage(TypeTransaction.Shopping)),
+                              DataChart('Health', wallet.percentage(TypeTransaction.Health)),
+                              DataChart('Leisure', wallet.percentage(TypeTransaction.Leisure)),
+                              DataChart('Other', wallet.percentage(TypeTransaction.Other)),
+                              DataChart('Income', wallet.percentage(TypeTransaction.Income))
                             ];
                           return SfCircularChart(
                             title: const ChartTitle(text: 'Percentage of Transactions'),
+                            legend: const Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap, position: LegendPosition.right),
                             tooltipBehavior: TooltipBehavior(enable: true),
-                            legend: const Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
                             series: <CircularSeries<DataChart, String>>[
                               DoughnutSeries<DataChart, String>(
                                   dataSource: data,
                                   xValueMapper: (DataChart el, _) => el.x,
                                   yValueMapper: (DataChart el, _) => el.y,
+                                  dataLabelMapper: (DataChart el, _) => el.x,
+                                  enableTooltip: true,
                                   name: 'Chart')
                             ],
                           );
@@ -56,38 +57,6 @@ class homePage extends StatelessWidget {
                     )
                   )
                 ),
-                Flexible(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height/3,
-                    width: MediaQuery.of(context).size.width/2,
-                    child: Card(
-                      child: Consumer<Wallet>(
-                        builder: (context, wallet, child){
-                          List<double> values=wallet.percentageIn();
-                          List<DataChart> data = [
-                              DataChart('Income', values[0]),
-                              DataChart('Outcome', values[1]),
-                            ];
-                          return SfCircularChart(
-                            title: const ChartTitle(text: 'Percentage of In-Out'),
-                            tooltipBehavior: TooltipBehavior(enable: true),
-                            legend: const Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
-                            series: <CircularSeries<DataChart, String>>[
-                              DoughnutSeries<DataChart, String>(
-                                  dataSource: data,
-                                  xValueMapper: (DataChart el, _) => el.x,
-                                  yValueMapper: (DataChart el, _) => el.y,
-                                  name: 'Chart')
-                            ],
-                          );
-                        }
-                      ),
-                    )
-                  )
-                ),
-              ],
-            ),
-            
             Card(
               child: Row(
                 children: <Widget>[

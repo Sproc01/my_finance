@@ -33,7 +33,7 @@ class Wallet extends ChangeNotifier
     notifyListeners();
   }
 
-  double percentageOut(TypeTransaction type){
+  double percentage(TypeTransaction type){
     double totalType = 0;
     for (var transaction in transactions) {
       if (transaction.type == type) {
@@ -41,20 +41,6 @@ class Wallet extends ChangeNotifier
       }
     }
     return totalType;
-  }
-
-  List<double> percentageIn(){
-    double totalOut = 0;
-    double totalIn = 0;
-    for (var transaction in transactions) {
-      if(transaction.type == TypeTransaction.Income){
-        totalIn += transaction.amount;
-      }
-      else{
-        totalOut += transaction.amount;
-      }
-    }
-    return [totalIn, totalOut];
   }
 
   addToSF() async {
