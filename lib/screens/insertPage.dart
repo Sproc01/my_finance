@@ -6,6 +6,7 @@ import 'package:my_finance/src/TypeTransaction.dart';
 int dropdownValue = 0;
 const listGlobal = TypeTransaction.values;
 
+// ignore: camel_case_types
 class insertOutPage extends StatelessWidget {
   insertOutPage({Key? key}) :
   super(key: key);
@@ -34,7 +35,7 @@ class insertOutPage extends StatelessWidget {
             TextField(
                 controller: myController,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.attach_money),
                   labelText: 'Amount',
                 ),
                 maxLines: 1,       
@@ -48,14 +49,6 @@ class insertOutPage extends StatelessWidget {
                 autofocus: true,
             ),
             const SizedBox(height: 20),
-            const Row(
-              children: <Widget>[
-                Text('Type of Transaction: ', style: TextStyle(fontSize: 20)),
-                SizedBox(width: 20),
-                DropdownButtonTransaction(),
-              ],
-            ),
-            const SizedBox(height: 20),
             TextField(
               controller: dateController, //editing controller of this TextField
               decoration: const InputDecoration( 
@@ -66,7 +59,7 @@ class insertOutPage extends StatelessWidget {
               onTap: () async {
                 DateTime? pickedDate = await showDatePicker(
                     context: context,
-                      initialDate: DateTime.now(), //get today's date
+                    initialDate: DateTime.now(), //get today's date
                     firstDate:DateTime(2000), //DateTime.now() - not to allow to choose before today.
                     lastDate: DateTime(2101)
                 );
@@ -76,6 +69,14 @@ class insertOutPage extends StatelessWidget {
                     dateController.text = formattedDate;
                 }
               },
+            ),
+            const SizedBox(height: 20),
+            const Row(
+              children: <Widget>[
+                Text('Type of Transaction: ', style: TextStyle(fontSize: 20)),
+                SizedBox(width: 20),
+                DropdownButtonTransaction(),
+              ],
             ),
             const SizedBox(height: 20),
             FilledButton(
@@ -120,8 +121,9 @@ class _DropdownButtonTransactionState extends State<DropdownButtonTransaction> {
     List<String> list = valueTypeTransaction();
     return DropdownButton<String>(
       value: list[dropdownValue],
-      icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+      icon: const Icon(Icons.arrow_drop_down),
       elevation: 16,
+      style: const TextStyle(textBaseline: TextBaseline.alphabetic, fontSize: 20),
       underline: Container(
         height: 5,
       ),

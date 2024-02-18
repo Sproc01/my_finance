@@ -1,5 +1,4 @@
 import "dart:convert";
-
 import "package:my_finance/src/TypeTransaction.dart";
 
 class Transaction
