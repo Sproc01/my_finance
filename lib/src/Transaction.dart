@@ -23,27 +23,35 @@ class Transaction
     return Transaction.withId(
       jsonData['id'],
       jsonData['amount'],
-      jsonData['date'],
-      jsonData['type'],
+      DateTime.parse(jsonData['date']),
+      TypeTransaction.values.firstWhere((e) => e.toString() == jsonData['type']),
     );
   }
 
   static Map<String, dynamic> toMap(Transaction t) => {
     'id': t.id,
     'amount': t.amount,
-    'date': t.date,
-    'type': t.type,
+    'date': t.date.toIso8601String(),
+    'type': t.type.toString(),
   };
 
-  static String encode(List<Transaction> t) => json.encode(
-    t
-      .map<Map<String, dynamic>>((el) => Transaction.toMap(el))
-      .toList(),
-  );
+  static String encode(List<Transaction> t)
+  {
+    List<Map<String, dynamic>> list = [];
+    for (var i = 0; i < t.length; i++) {
+      list.add(Transaction.toMap(t[i]));
+    }
+    return json.encode(list);
+  }
 
-  static List<Transaction> decode(String t) =>
-    (json.decode(t) as List<dynamic>)
-        .map<Transaction>((item) => Transaction.fromJson(item))
-        .toList();
+  static List<Transaction> decode(String t) 
+  {
+    List<Transaction> transactions = [];
+    List<dynamic> list = json.decode(t);
+    for (var i = 0; i < list.length; i++) {
+      transactions.add(Transaction.fromJson(list[i]));
+    }
+    return transactions;
+  }
 
 }

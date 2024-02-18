@@ -11,6 +11,7 @@ class insertOutPage extends StatelessWidget {
   super(key: key);
   static const routename = 'Insert Transaction';
   final myController = TextEditingController();
+  final dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +56,28 @@ class insertOutPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
+            TextField(
+              controller: dateController, //editing controller of this TextField
+              decoration: const InputDecoration( 
+                icon: Icon(Icons.calendar_today), //icon of text field
+                labelText: "Enter Date" //label text of field
+              ),
+              readOnly: true,  // when true user cannot edit text 
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                      initialDate: DateTime.now(), //get today's date
+                    firstDate:DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                    lastDate: DateTime(2101)
+                );
+                if(pickedDate != null){
+                    String formattedDate = "${pickedDate.year}-${pickedDate.month.toString().padLeft(2,'0')}-${pickedDate.day.toString().padLeft(2, '0')}";
+                    //below line adds the date to the controller
+                    dateController.text = formattedDate;
+                }
+              },
+            ),
+            const SizedBox(height: 20),
             FilledButton(
               onPressed:(){
                 if (myController.text.isEmpty) {
@@ -67,11 +90,10 @@ class insertOutPage extends StatelessWidget {
                 }
                 Transaction t;
                 if (listGlobal[dropdownValue].toString().split('.').last == "Income") {
-                  t = Transaction(double.parse(myController.text), DateTime.now(), listGlobal[dropdownValue]);
+                  t = Transaction(double.parse(myController.text), DateTime.parse(dateController.text), listGlobal[dropdownValue]);
                 }
-                else
-                {
-                  t = Transaction(-double.parse(myController.text), DateTime.now(), listGlobal[dropdownValue]);
+                else{
+                  t = Transaction(-double.parse(myController.text), DateTime.parse(dateController.text), listGlobal[dropdownValue]);
                 }
                 Navigator.pop(context, Transaction.toMap(t));
               },

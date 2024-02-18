@@ -59,7 +59,15 @@ class homePage extends StatelessWidget {
                   const Text('Amount available: ', style: TextStyle(fontSize: 20)),
                   const SizedBox(width: 40),
                   Consumer<Wallet>(
-                    builder: (context, wallet, child)=>Text(wallet.balance.toString(), style: const TextStyle(fontSize: 20)),
+                    builder: (context, wallet, child)
+                    {
+                      if (wallet.balance < 0) {
+                        return Text(wallet.balance.toString(), style: const TextStyle(fontSize: 20, color: Colors.red));
+                      }
+                      else {        
+                        return Text(wallet.balance.toString(), style: const TextStyle(fontSize: 20, color: Colors.green));
+                      }
+                    },
                   ),
                 ],
               ),
@@ -72,7 +80,7 @@ class homePage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(wallet.transactions[index].amount.toString()),
-                    subtitle: Text("${wallet.transactions[index].date} ${wallet.transactions[index].type.toString().split('.').last}"),
+                    subtitle: Text("${wallet.transactions[index].date.year}-${wallet.transactions[index].date.month}-${wallet.transactions[index].date.day}, ${wallet.transactions[index].type.toString().split('.').last}"),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red,),
                       onPressed: () {

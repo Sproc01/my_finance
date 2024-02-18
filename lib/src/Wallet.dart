@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_finance/src/TypeTransaction.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Transaction.dart';
 
 class Wallet extends ChangeNotifier
@@ -15,23 +16,20 @@ class Wallet extends ChangeNotifier
 
   Wallet();
 
-  factory Wallet.fromJson(Map<String, dynamic> jsonData) {
-    Wallet w=Wallet();
-    w.transactions = Transaction.decode(jsonData['transactions']);
-    return w;
+  Wallet.fromTransactions(List<Transaction> t){
+    transactions = t;
   }
-
-  static Map<String, dynamic> toMap(Wallet t) => {
-    'transactions': Transaction.encode(t.transactions),
-  };
 
   void addTransaction(Transaction transaction){
     transactions.add(transaction);
+    transactions.sort((a, b) => -a.date.compareTo(b.date));
+    addToSF();
     notifyListeners();
   }
 
   void removeTransaction(Transaction transaction){
     transactions.remove(transaction);
+    addToSF();
     notifyListeners();
   }
 
@@ -47,5 +45,10 @@ class Wallet extends ChangeNotifier
       }
     }
     return -1*totalType/total*100;
+  }
+
+  addToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('wallet', Transaction.encode(transactions));
   }
 }
