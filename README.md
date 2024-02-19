@@ -9,7 +9,7 @@ The app does not require any permission.
 <p>The app support only the english language.</p>
 
 ## Technical information
-<p>The app is written in flutter(https://flutter.dev) and it uses material3(https://m3.material.io) for interface components. The app is tested on a macOs, ios 16.2 and android 9</p>
+<p>The app is written in flutter(https://flutter.dev) and it uses material3(https://m3.material.io) for interface components. The app is tested on a macOs, ios 16.2 and android 9.</p>
 
 ## SCREENSHOT
 Vertical Screenshot home page and Insert page in a light background.
