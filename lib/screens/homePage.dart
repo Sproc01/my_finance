@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:my_finance/src/TypeTransaction.dart';
 import 'package:my_finance/src/Wallet.dart';
 import 'package:flutter/material.dart';
@@ -98,9 +100,9 @@ class homePage extends StatelessWidget {
                 },
               ),
             ),
+            const SizedBox(height: 50)
           ],)
       ),
-
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final result = await Navigator.pushNamed(context, '/insertOut/');
@@ -112,6 +114,7 @@ class homePage extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Operation cancelled')));
           }
         },
+        elevation: 10,
         child: const Icon(Icons.add),
       ),
     );
