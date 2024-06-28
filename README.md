@@ -6,10 +6,10 @@ A simple flutter app that allows the user to manage his finance and have a track
 The app does not require any permission.
 
 ## Supported Language
-<p>The app support only the english language.</p>
+The app support only the english language.
 
 ## Technical information
-<p>The app is written in flutter(https://flutter.dev) and it uses material3(https://m3.material.io) for interface components. The app is tested on a macOs, ios 16.2 and android 9.</p>
+The app is written in [Flutter](https://flutter.dev) and it uses [Material3](https://m3.material.io) for interface components. The app is tested on a macOS, iOS 16.2 and Android 9.
 
 ## Screenshot
 Vertical Screenshot home page and Insert page in a light background.
